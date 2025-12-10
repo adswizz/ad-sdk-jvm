@@ -11,7 +11,7 @@ Learn the basics of how to request ads from the Adswizz Server and how to genera
       <td><h4 id="customTableTitle"><a href="#/JvmSDK/SDK/GetStarted">Get started</a></h4>
       <p id="customTableDescription">A short guide to get you up and running.</p></td>
       <td><h4 id="customTableTitle"><a href="#/JvmSDK/SDK/AdInsertion">Ad Insertion</a></h4>
-      <p id="customTableDescription">Tools and information to familiarize yourself with concepts like <span id="highlighted">AdRequest</span>, <span id="highlighted">AdRequestConnection</span> and <span id="highlighted">AdManager</span>.</p></td>
+      <p id="customTableDescription">Tools and information to familiarize yourself with concepts like <span id="highlighted">AdRequest</span>, <span id="highlighted">AdRequestConnection</span> and <span id="highlighted">AdswizzTrackingEngine</span>.</p></td>
     </tr>
     <tr>
       <td><h4 id="customTableTitle"><a href="#/JvmSDK/SDK/AdswizzGeneralSettings">AdswizzSDK General Settings</a></h4>
