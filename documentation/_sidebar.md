@@ -4,7 +4,7 @@
 
     - [Before you start](JvmSDK/SDK/BeforeYouStart.md)
     - [Get started](JvmSDK/SDK/GetStarted.md)
-    - [Ad Insertion](JvmSDK/SDK/ClientSideInsertion.md)
+    - [Ad Insertion](JvmSDK/SDK/AdInsertion.md)
     - [AdswizzSDK general settings](JvmSDK/SDK/AdswizzGeneralSettings.md)
     - [Vast Macros](JvmSDK/SDK/VastMacros.md)
     - [AdData interface](JvmSDK/SDK/AdDataInterface.md)
