@@ -5,16 +5,16 @@ The AdswizzSDK uses an internal logger called **_AdLogger_**. This logger handle
 If the **_AdswizzSDK.logger_** property is assigned with an implementation of the **_Logger_** interface, the messages are sent back through the `log` callback.
 
 ```kotlin
-interface Logger {
-    fun log(type: LogType, tag: String, message: String)
+AdswizzSDK.logger = object : Logger{
+    override fun log(type: LogType, tag: String, message: String) {
+        // add your custom logs
+    }
 }
-
-......
-object AdswizzSDK {
-	...
-	var logger: Logger? = null
-	...
-}
-
 ```
+```java
+AdswizzSDK.INSTANCE.setLogger((logType, s, s1) -> {
+    // add your custom logs
+});
+```
+
 
