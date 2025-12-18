@@ -1,5 +1,7 @@
 # AdswizzTrackingEngine
 
+## AdswizzTrackingEngine class
+
 The `AdswizzTrackingEngine` is the core of Server Side SDK business logic, the API and the main interface of the SDK.
 The interface consist of a simple interface with only 5 functions **_started_**, **_progress_**, **_onEvent_**, **_started_** , **_ended_**, **_error_**
 
@@ -22,7 +24,6 @@ The interface consist of a simple interface with only 5 functions **_started_**,
         AdswizzTrackingException.InvalidElapsedTime::class)
     fun progress(payload: ByteArray, elapsedTime: Double, macroContext: MacroContext?): ByteArray
 
-
     @Throws(AdswizzTrackingException.InvalidPayload::class,
         AdswizzTrackingException.InvalidArgument::class,
         AdswizzTrackingException.InternalError::class,
@@ -35,6 +36,14 @@ The interface consist of a simple interface with only 5 functions **_started_**,
         AdswizzTrackingException.InvalidElapsedTime::class)
     fun ended(payload: ByteArray, elapsedTime: Double, reason: AdReasonType, macroContext: MacroContext?): ByteArray
 ```
+
+The byte array returned by each function contain states that are used to preserve the state between consecutive calls and each byte array returned by a function call
+should be used for the next API call and so one. Otherwise the VAST events could be fired multiple times.
+
+Each call to that contains a macrocontext will update the previous macrocontext values with the current ones.
+
+
+## AdswizzTrackingEngine.Builder class
 
 In order to get an implementation the companion builder must be used. For the initial version only one parameter is available that sets up
 how the Engine works. 
@@ -55,9 +64,9 @@ API usage in a definite order. After initial request to ad delivery, the track e
 In the default cases there should be a strict order: `started` method should be called first, followed by `progress` method with playhead updates and `onEvent` if is the case
 and should end the playback of the current ad with `ended` or `error` API call. The SDK will fire quartiles based on this calls without any specific assumption.
 
-In case `withAutomaticTrackingDecisions` builder method is used with a tru value, the default logis is overwrited and a specific engine which makes assumptions 
+In case `withAutomaticTrackingDecisions` builder method is used with a true value, the default logic is overwritten and a specific engine which makes assumptions 
 will be used. In this case, calling `progress` without calling `started` first will internally decide  to fire the impressions events  as well as other events that are needed for the current playhead position 
-like it should if the `started` function was called. So it fills the missing api calls based on some internal assupmtions.
+like it should if the `started` function was called. So it fills the missing api calls based on some internal assumptions.
 
 ```kotlin
  companion object {
@@ -65,3 +74,9 @@ like it should if the `started` function was called. So it fills the missing api
     }
     
 ```
+
+## Payload byte array
+
+The payload contains state required by the SDK to operate and consist of impressions url, tracking url, error urls a playing state and a macrocontext initially set in the ad request.
+Each time a macrocontext is set in an API the values stored in the payload are updated with the values set in the macrocontext variable.
+

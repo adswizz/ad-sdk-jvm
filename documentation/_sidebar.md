@@ -8,7 +8,7 @@
     - [AdswizzSDK Consents](JvmSDK/SDK/AdswizzPrivacyConsent.md)
     - [Vast Macros](JvmSDK/SDK/VastMacros.md)
     - [Track Engine](JvmSDK/SDK/AdswizzTrackingEngine.md)
-    - [AdData interface](JvmSDK/SDK/AdDataInterface.md)
+    - [AdResponseItem](JvmSDK/SDK/AdResponseItem.md)
     - [AdswizzSDK Analytics](JvmSDK/SDK/AdswizzSDKAnalytics.md)
     - [Debugging](JvmSDK/SDK/Debugging.md)
     - [Sample projects](JvmSDK/SDK/SampleProjects.md)   
