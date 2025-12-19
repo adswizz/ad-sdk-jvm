@@ -3,7 +3,7 @@
 This guide is addressed to developers who want to integrate the AdswizzSDK in their apps. Here is a quick overview. More details will be provided for each scenario in their respective section.
 
 ## Thread safety
-The AdswizzSDK is not thread safe, so it is expected that all the calls to the SDK are done on the main thread. The AdswizzSDK does all the heavy lifting on other threads, so that the main one remains responsive.
+The AdswizzSDK does all the heavy lifting on other threads, so that the main one remains responsive. The public methods with a completion handler, e.g. `AdswizzSDK.initialize`, `AnalyticsConnector.onLog`, are moved to a background thread. 
 
 ## What is Client-Side Insertion
 

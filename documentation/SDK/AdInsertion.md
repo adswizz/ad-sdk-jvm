@@ -139,5 +139,7 @@ As a result of this call, the SDK will throw an error if the call was a failure 
 
 ## Working with AdResponse List
 
-If the request to the Adswizz Ad server was a success, the SDK will return a AdResponseItem list, that you will own.
-Work in Progress
+If the request to the Adswizz Ad server was a success, the SDK will return a [AdResponseItem]((JvmSDK/SDK/AdResponseItem.md)) list, that you will own. 
+For each `adResponseItem`, you can access: 
+- the ad `payload` which is used for ad reporting purposes using the [AdswizzTrackingEngine](JvmSDK/SDK/AdswizzTrackingEngine.md).
+- the `adData` which is used to provide ad information like: `id`, `title`, `duration`, `MediaFile` list.

@@ -85,10 +85,10 @@ dependencies {
     //.... other dependencies
 }
 ```
-In the code snippet above, replace <strong>SdkVersion</strong> with the version of SDK provided by Adswizz (i.e. 1.0.0 - the latest version). Example:
+In the code snippet above, replace <strong>SdkVersion</strong> with the version of SDK provided by Adswizz (i.e. 0.4.0 - the latest version). Example:
 
 ```groovy
-implementation 'com.adswizz:adswizz-sdk:1.0.0'
+implementation 'com.adswizz:adswizz-sdk:0.4.0'
 
 ```
 
