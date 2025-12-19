@@ -37,7 +37,7 @@ encoder_version = "1.4.0"
 If you are excluding any tested dependency version and using another version (that doesn't ensure backward/forward compatibility with the version we have tested) you may encounter unexpected behavior.<br>
 ---  
 
-## Adding the SDK to your Android Studio Project
+## Adding the SDK to your Project
 
 You can easily integrate the AdswizzSDK into your project. There are 2 steps to this integration:
 
