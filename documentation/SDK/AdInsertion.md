@@ -7,16 +7,18 @@ You are now ready for your first ad request. You will need to create an AdswizzA
 **Minimal request parameters** The `AdswizzAdRequest` requires at minimum to set the server url and a set of one ore more `AdswizzAdZone` or an `AdswizzShimZone`.
 
 ```kotlin
-    data class AdswizzAdZone @JvmOverloads constructor(
-    @Json(name = "zoneId")
-    val zoneId: String,
-    @Json(name = "maxAds")
-    val maxAds: Int? = null,
-    @Json(name = "maxDuration")
-    val maxDuration: Double? = null,
-    @Json(name = "zoneAlias")
-    val zoneAlias: String? = null
-)
+AdswizzAdZone.Builder()
+    .withZoneId("ZONEID_1_PROVIDED_BY_PIM") // or .withZoneAlias("ZONE_ALIAS_PROVIDED_BY_PIM")
+    .withMaxAds(maxAds = 3)
+    .withMaxDuration(maxDuration = 30_000)
+    .build()
+```
+```java
+new AdswizzAdZone.Builder()
+    .withZoneId("ZONEID_1_PROVIDED_BY_PIM") // or  .withZoneAlias("ZONE_ALIAS_PROVIDED_BY_PIM")
+    .withMaxAds(3)
+    .withMaxDuration(30000L)
+    .build();
 ```
 Each `AdswizzAdZone` object is defined by a mandatory `zoneId` or `zoneAlias`, provided by the PIM/TAM, and optional `maxAds` and `maxDuration` fields. The optional fields are determined by the application logic and are not required.
 
@@ -24,14 +26,16 @@ Each `AdswizzAdZone` object is defined by a mandatory `zoneId` or `zoneAlias`, p
 `zoneId` parameter is not mandatory if `zoneAlias` is present. However, they cannot be set simultaneously with `null` or `not null` values, this will lead to a runtime exception.
 
 ```kotlin
-data class AdswizzShimZone @JvmOverloads constructor(
-    @Json(name = "zoneId")
-    val zoneId: String? = null,
-    @Json(name = "maxDeadAir")
-    val maxDeadAir: Long? = null,
-    @Json(name = "zoneAlias")
-    val zoneAlias: String? = null
-)
+AdswizzShimZone.Builder()
+    .withZoneId("SHIM_ZONEID_1_PROVIDED_BY_PIM") // or .withZoneAlias("SHIM_ZONE_ALIAS_PROVIDED_BY_PIM")
+    .withMaxDeadAir(3_000)
+    .build()
+```
+```java
+new AdswizzShimZone.Builder()
+    .withZoneId("SHIM_ZONEID_1_PROVIDED_BY_PIM") // or .withZoneAlias("SHIM_ZONE_ALIAS_PROVIDED_BY_PIM")
+    .withMaxDeadAir(3000L)
+    .build();
 ```
 Each `AdswizzShimZone` object is defined by a mandatory `zoneId`/`zoneAlias` and an optional `maxDeadAir` field, where `zoneId` or `zoneAlias` is provided by the PIM.
 The fields `zoneId` or `zoneAlias` checked in the same manner as AdswizzAdZone. The `maxDeadAir` parameter represents the minimal threshold time necessary to fill the remaining duration with shims ads.
@@ -40,7 +44,11 @@ The minimal request looks like the following: one or more zones and a server url
 ```kotlin
 	val adswizzAdRequest = AdswizzAdRequest.Builder() //Build the Ad Request with the needed parameters
             .withServer("SERVER_PROVIDED_BY_PIM")
-            .withZones(listOf(AdswizzAdZone("ZONEID_1_PROVIDED_BY_PIM"), ... AdswizzAdZone("ZONEID_n_PROVIDED_BY_PIM")))
+            .withZones(listOf(
+                AdswizzAdZone.Builder().withZoneId("ZONEID_1_PROVIDED_BY_PIM").build(),
+                ...,
+                AdswizzAdZone.Builder().withZoneId("ZONEID_n_PROVIDED_BY_PIM").build()
+            )
             .build()
 ```
 
@@ -49,7 +57,10 @@ The minimal request looks like the following: one or more zones and a server url
     try {
         adswizzAdRequest = new AdswizzAdRequest.Builder()
             .withServer("SERVER_PROVIDED_BY_PIM")
-            .withZones(List.of(new AdswizzAdZone("ZONEID_1_PROVIDED_BY_PIM"), new AdswizzAdZone("ZONEID_n_PROVIDED_BY_PIM")))
+            .withZones(List.of(
+                new AdswizzAdZone.Builder().withZoneId("ZONEID_1_PROVIDED_BY_PIM").build(), 
+                ...
+                new AdswizzAdZone.Builder().withZoneId("ZONEID_n_PROVIDED_BY_PIM").build()))
             .build();
     } catch (SDKError e) {
     }
@@ -67,7 +78,7 @@ Only one shim zone can be set in `AdswizzAdRequest`.
 ```kotlin
 	val adswizzAdRequest = AdswizzAdRequest.Builder() //Build the Ad Request with the needed parameters
             .withServer("SERVER_PROVIDED_BY_PIM")
-            .withShimZone(AdswizzShimZone("SHIM_ZONE_ID"))
+            .withShimZone(AdswizzShimZone.Builder().withZoneId("SHIM_ZONEID_1_PROVIDED_BY_PIM").build())
             .build()
 ```
 
@@ -76,7 +87,7 @@ Only one shim zone can be set in `AdswizzAdRequest`.
     try {
         adswizzAdRequest = new AdswizzAdRequest.Builder()
             .withServer("SERVER_PROVIDED_BY_PIM")
-            .withShimZone(new AdswizzShimZone("SHIM_ZONE_ID"))
+            .withShimZone(new AdswizzShimZone.Builder().withZoneId("SHIM_ZONEID_1_PROVIDED_BY_PIM").build())
             .build();
     } catch (SDKError e) {
     }
@@ -139,7 +150,7 @@ As a result of this call, the SDK will throw an error if the call was a failure 
 
 ## Working with AdResponse List
 
-If the request to the Adswizz Ad server was a success, the SDK will return a [AdResponseItem]((JvmSDK/SDK/AdResponseItem.md)) list, that you will own. 
+If the request to the Adswizz Ad server was a success, the SDK will return a [AdResponseItem](JvmSDK/SDK/AdResponseItem.md) list, that you will own. 
 For each `adResponseItem`, you can access: 
 - the ad `payload` which is used for ad reporting purposes using the [AdswizzTrackingEngine](JvmSDK/SDK/AdswizzTrackingEngine.md).
 - the `adData` which is used to provide ad information like: `id`, `title`, `duration`, `MediaFile` list.
