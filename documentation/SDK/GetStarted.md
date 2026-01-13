@@ -102,7 +102,7 @@ AdswizzSDK.initialize("ADD_YOUR_INSTALLATION_ID_HERE"){
 ```
 
 ```java
-AdswizzSDK.INSTANCE.initialize("ADD_YOUR_INSTALLATION_ID_HERE", () -> {
+AdswizzSDK.initialize("ADD_YOUR_INSTALLATION_ID_HERE", () -> {
     System.out.println("SDK init completed");
     // your logic after SDK is initialised 
 });
@@ -115,7 +115,7 @@ AdswizzSDK.cleanup()
 ```
 
 ```java
-AdswizzSDK.INSTANCE.cleanup();
+AdswizzSDK.cleanup();
 ```
 
 Call it when you no longer need the SDK.

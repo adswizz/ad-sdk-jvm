@@ -12,7 +12,7 @@ AdswizzSDK.logger = object : Logger{
 }
 ```
 ```java
-AdswizzSDK.INSTANCE.setLogger((logType, s, s1) -> {
+AdswizzSDK.setLogger((logType, s, s1) -> {
     // add your custom logs
 });
 ```

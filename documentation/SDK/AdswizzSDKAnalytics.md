@@ -43,7 +43,7 @@ AdswizzSDK.analytics?.add(myAnalyticsConnector)
 ```
 
 ```java
-AnalyticsCollector analyticsCollector = AdswizzSDK.INSTANCE.getAnalytics();
+AnalyticsCollector analyticsCollector = AdswizzSDK.getAnalytics();
 if (analyticsCollector != null) {
     analyticsCollector.add(connector);
 }
@@ -59,8 +59,8 @@ AdswizzSDK.initialize("YOUR_INSTALLATION_ID"){
 ```
 
 ```java
-AdswizzSDK.INSTANCE.initialize("YOUR_INSTALLATION_ID", () -> {
-    AnalyticsCollector analyticsCollector = AdswizzSDK.INSTANCE.getAnalytics();
+AdswizzSDK.initialize("YOUR_INSTALLATION_ID", () -> {
+    AnalyticsCollector analyticsCollector = AdswizzSDK.getAnalytics();
     if (analyticsCollector != null) {
         analyticsCollector.add(connector);
     }
@@ -71,7 +71,7 @@ When a connector is no longer needed, it can be removed as follows:
 AdswizzSDK.analytics?.remove(connector)
 ```
 ```java
-AnalyticsCollector analyticsCollector = AdswizzSDK.INSTANCE.getAnalytics();
+AnalyticsCollector analyticsCollector = AdswizzSDK.getAnalytics();
 if (analyticsCollector != null) {
     analyticsCollector.remove(connector);
 }
