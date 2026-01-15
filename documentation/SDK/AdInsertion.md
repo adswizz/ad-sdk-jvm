@@ -20,7 +20,9 @@ new AdswizzAdZone.Builder()
     .withMaxDuration(30000L)
     .build();
 ```
-Each `AdswizzAdZone` object is defined by a mandatory `zoneId` or `zoneAlias`, provided by the PIM/TAM, and optional `maxAds` and `maxDuration` fields. The optional fields are determined by the application logic and are not required.
+Each `AdswizzAdZone` object is defined by a mandatory `zoneId` or `zoneAlias`, provided by the PIM/TAM, and optional `maxAds` and `maxDuration` fields. The optional fields are determined by the application logic and are not required.</br>
+ `maxDuration` represents the maximum duration of the ad pod for the specified zone. The returned ad pod duration will never be greater than this parameter.</br>
+ `maxAds` represents the maximum ad count for the specified zone that can be returned. The ad count will never be greater than this parameter.</br>
 
 **Note**
 `zoneId` parameter is not mandatory if `zoneAlias` is present. However, they cannot be set simultaneously with `null` or `not null` values, this will lead to a runtime exception.
