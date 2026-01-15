@@ -117,5 +117,7 @@ AdswizzSDK.cleanup()
 ```java
 AdswizzSDK.cleanup();
 ```
-
-Call it when you no longer need the SDK.
+When to call `cleanup`?
+- when you no longer need the SDK (E.g.: ad service lifecycle gets cleared/destroyed, business logic decisions like subscription change). This would also clear some class instances kept by the SDK.
+- if you want to reinitialise the AdswizzSDK with different installation id.
+- if you want to stop receiving analytics events. This would also clear all the `AnalyticsConnectors` added to the SDK.
