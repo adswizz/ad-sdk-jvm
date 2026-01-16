@@ -8,5 +8,7 @@ Password: your_access_token (provided by AdsWizz)
 ```
 
 ---
-## Work in progress
+## Basic SpringBoot Sample Java
+This sample demonstrates a basic ad insertion scenario by showing how to create and customize an AdswizzAdRequest. It shows how to use it to create an AdRequestConnection and finally request ads. Next, it demonstrates basic usage for logging analytics events and ad reporting using the `AdswizzTrackingEngine` methods. 
+
 ---
