@@ -9,7 +9,7 @@ The AdswizzSDK facilitates the ad lifecycle management, right from your applicat
 
 ## Changelog
 
-Please check [here](JvmSDK/CHANGELOG.md) the latest AdswizzSDK version and all the new changes & fixes it comes with.
+Please check [here](JvmSDK/CHANGELOG.md) for the latest AdswizzSDK version and all the new changes & fixes it comes with.
 
 ## Dependencies
 
@@ -102,7 +102,7 @@ AdswizzSDK.initialize("ADD_YOUR_INSTALLATION_ID_HERE"){
 ```
 
 ```java
-AdswizzSDK.INSTANCE.initialize("ADD_YOUR_INSTALLATION_ID_HERE", () -> {
+AdswizzSDK.initialize("ADD_YOUR_INSTALLATION_ID_HERE", () -> {
     System.out.println("SDK init completed");
     // your logic after SDK is initialised 
 });
@@ -115,7 +115,9 @@ AdswizzSDK.cleanup()
 ```
 
 ```java
-AdswizzSDK.INSTANCE.cleanup();
+AdswizzSDK.cleanup();
 ```
-
-Call it when you no longer need the SDK.
+When to call `cleanup`?
+- when you no longer need the SDK (E.g.: ad service lifecycle gets cleared/destroyed, business logic decisions like subscription change). This would also clear some class instances kept by the SDK.
+- if you want to reinitialise the AdswizzSDK with different installation id.
+- if you want to stop receiving analytics events. This would also clear all the `AnalyticsConnectors` added to the SDK.

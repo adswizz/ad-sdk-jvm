@@ -15,7 +15,7 @@ To successfully perform Client-Side Insertion you will need to set/provide the f
 *  adServer = the name of the AdServer to fetch ads from
 *  zones = one or more ```AdswizzAdZone``` to identify the zone/zones to retrieve audio/video ads from
 *  companionZones = (optional) identifier of the zone from which to retrieve creatives to be displayed by the companion banner
-*  (optional) list of custom site variables used for ad selection (e.g referrer)
+*  (optional) list of custom site variables used for ad selection (E.g. referrer)
 *  (optional) GDPR consent value
 *  (optional) CCPA (U.S. privacy string) consent value
 *  (optional) macro context. This contains information that the integrator should provide, and will be used by the SDK for VAST macro expansion.
