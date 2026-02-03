@@ -207,7 +207,7 @@ public class BasicSpringBootSampleJavaApplication {
                 .build();
 
         try {
-            byte[] newPayload = trackingEngine.onEvent(payload, Duration.ofMillis(0), eventType, newMacro);
+            byte[] newPayload = trackingEngine.onEvent(payload, null, eventType, newMacro);
             adPayloadStorage.put(unique_id, newPayload);
             milis = System.currentTimeMillis() - milis;
 
@@ -224,7 +224,7 @@ public class BasicSpringBootSampleJavaApplication {
         long milis = System.currentTimeMillis();
 
         try {
-            byte[] newPayload = trackingEngine.ended(item, Duration.ofMillis(0), AdReasonType.AD_COMPLETED, null);
+            byte[] newPayload = trackingEngine.ended(item, null, AdReasonType.AD_COMPLETED, null);
             milis = System.currentTimeMillis() - milis;
             adPayloadStorage.put(unique_id, newPayload);
             return "{ \"initialByteArraySize\":\"" + initialSize + ",\"newByteArraySize\":" + newPayload.length + ",\"durationMillis\":" + milis + "}";
@@ -248,7 +248,7 @@ public class BasicSpringBootSampleJavaApplication {
                 .build();
 
         try {
-            byte[] newPayload = trackingEngine.ended(item, Duration.ofMillis(0), AdReasonType.AD_SKIPPED_WITH_ERROR, newMacro);
+            byte[] newPayload = trackingEngine.ended(item, null, AdReasonType.AD_SKIPPED_WITH_ERROR, newMacro);
             adPayloadStorage.put(unique_id, newPayload);
             milis = System.currentTimeMillis() - milis;
 
