@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -70,11 +71,13 @@ public class BasicSpringBootSampleJavaApplication {
 
     @GetMapping("/adRequest")
     public String callAdRequest() {
+        long milis = System.currentTimeMillis();
+
         ArrayList<AdswizzAdZone> zones = new ArrayList<>();
         zones.add(new AdswizzAdZone.Builder()
                 .withZoneId("18366")
                 .withMaxAds(3)
-                .withMaxDuration(40000L)
+                .withMaxDuration(Duration.ofMillis(40000))
                 .build());
 
         // setting the initial macro context;
@@ -114,12 +117,14 @@ public class BasicSpringBootSampleJavaApplication {
         StringBuilder returnStr = new StringBuilder();
 
         returnStr.append("{ \"ads\":[");
+        milis = System.currentTimeMillis() - milis;
+
         for (int i = 0; i < adResponseItems.size(); i++) {
             String key = UUID.randomUUID().toString();
             returnStr.append("{ \"key\":\"").append(key).
                     append("\", \"payload_size\":\"").append(adResponseItems.get(i).getPayload().length).
                     append("\", \"adid\":\"").append(adResponseItems.get(i).getAdData().getId()).
-                    append("\", \"duration\":\"").append(adResponseItems.get(i).getAdData().getDuration()).
+                    append("\", \"duration\":\"").append(milis).
                     append("\"}");
             if (i < adResponseItems.size() - 1) {
                 returnStr.append(",");
@@ -138,7 +143,7 @@ public class BasicSpringBootSampleJavaApplication {
         long milis = System.currentTimeMillis();
 
         try {
-            byte[] newPayload = trackingEngine.started(item, 0.0, null);
+            byte[] newPayload = trackingEngine.started(item, Duration.ofMillis(0), null);
             milis = System.currentTimeMillis() - milis;
             newSize = newPayload.length;
             adPayloadStorage.put(unique_id, newPayload);
@@ -168,8 +173,9 @@ public class BasicSpringBootSampleJavaApplication {
                 .withAdPlayHead(playhead)
                 .build();
 
+
         try {
-            byte[] newPayload = trackingEngine.progress(item, playhead, newMacro);
+            byte[] newPayload = trackingEngine.progress(item, Duration.ofMillis((int)(playhead*1000)), newMacro);
             milis = System.currentTimeMillis() - milis;
             adPayloadStorage.put(unique_id, newPayload);
             newSize = newPayload.length;
@@ -201,7 +207,7 @@ public class BasicSpringBootSampleJavaApplication {
                 .build();
 
         try {
-            byte[] newPayload = trackingEngine.onEvent(payload, 0.0, eventType, newMacro);
+            byte[] newPayload = trackingEngine.onEvent(payload, Duration.ofMillis(0), eventType, newMacro);
             adPayloadStorage.put(unique_id, newPayload);
             milis = System.currentTimeMillis() - milis;
 
@@ -218,7 +224,7 @@ public class BasicSpringBootSampleJavaApplication {
         long milis = System.currentTimeMillis();
 
         try {
-            byte[] newPayload = trackingEngine.ended(item, 0.0, AdReasonType.AD_COMPLETED, null);
+            byte[] newPayload = trackingEngine.ended(item, Duration.ofMillis(0), AdReasonType.AD_COMPLETED, null);
             milis = System.currentTimeMillis() - milis;
             adPayloadStorage.put(unique_id, newPayload);
             return "{ \"initialByteArraySize\":\"" + initialSize + ",\"newByteArraySize\":" + newPayload.length + ",\"durationMillis\":" + milis + "}";
@@ -242,7 +248,7 @@ public class BasicSpringBootSampleJavaApplication {
                 .build();
 
         try {
-            byte[] newPayload = trackingEngine.ended(item, 0.0, AdReasonType.AD_SKIPPED_WITH_ERROR, newMacro);
+            byte[] newPayload = trackingEngine.ended(item, Duration.ofMillis(0), AdReasonType.AD_SKIPPED_WITH_ERROR, newMacro);
             adPayloadStorage.put(unique_id, newPayload);
             milis = System.currentTimeMillis() - milis;
 
