@@ -2,7 +2,7 @@
 
 The AdswizzSDK collects and exposes information on SDK events that occur during its lifecycle. It was built to log different event types (informative and errors) that cover both integration robustness and ad lifecycle management in the ad insertion scenario.
 
-To enable you to complement your specific app analytics system (e.g. Firebase, Mixpanel etc) with AdswizzSDK internal events, the analytics framework provides you with the ability to receive all the events from the SDK and forward them to your own ingestion pipelines by implementing our AnalyticsConnector interface.
+To enable you to complement your specific app analytics system (e.g. Firebase, AWS etc.) with AdswizzSDK internal events, the analytics framework provides you with the ability to receive all the events from the SDK and forward them to your own ingestion pipelines by implementing our AnalyticsConnector interface.
 To learn more about the types of events you can listen and use, please reach out to your Integration Manager at Adswizz.
 
 To register and receive the analytics events, you have to do two things:

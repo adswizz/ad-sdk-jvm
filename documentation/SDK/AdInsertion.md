@@ -10,14 +10,14 @@ You are now ready for your first ad request. You will need to create an AdswizzA
 AdswizzAdZone.Builder()
     .withZoneId("ZONEID_1_PROVIDED_BY_PIM") // or .withZoneAlias("ZONE_ALIAS_PROVIDED_BY_PIM")
     .withMaxAds(maxAds = 3)
-    .withMaxDuration(maxDuration = 30_000)
+    .withMaxDuration(maxDuration = 30_000.milliseconds)
     .build()
 ```
 ```java
 new AdswizzAdZone.Builder()
     .withZoneId("ZONEID_1_PROVIDED_BY_PIM") // or  .withZoneAlias("ZONE_ALIAS_PROVIDED_BY_PIM")
     .withMaxAds(3)
-    .withMaxDuration(30000L)
+    .withMaxDuration(Duration.ofMillis(30000L))
     .build();
 ```
 Each `AdswizzAdZone` object is defined by a mandatory `zoneId` or `zoneAlias`, provided by the PIM/TAM, and optional `maxAds` and `maxDuration` fields. The optional fields are determined by the application logic and are not required.</br>
@@ -30,13 +30,13 @@ Each `AdswizzAdZone` object is defined by a mandatory `zoneId` or `zoneAlias`, p
 ```kotlin
 AdswizzShimZone.Builder()
     .withZoneId("SHIM_ZONEID_1_PROVIDED_BY_PIM") // or .withZoneAlias("SHIM_ZONE_ALIAS_PROVIDED_BY_PIM")
-    .withMaxDeadAir(3_000)
+    .withMaxDeadAir(3_000.milliseconds)
     .build()
 ```
 ```java
 new AdswizzShimZone.Builder()
     .withZoneId("SHIM_ZONEID_1_PROVIDED_BY_PIM") // or .withZoneAlias("SHIM_ZONE_ALIAS_PROVIDED_BY_PIM")
-    .withMaxDeadAir(3000L)
+    .withMaxDeadAir(Duration.ofMillis(3000L))
     .build();
 ```
 Each `AdswizzShimZone` object is defined by a mandatory `zoneId`/`zoneAlias` and an optional `maxDeadAir` field, where `zoneId` or `zoneAlias` is provided by the PIM.
@@ -114,7 +114,7 @@ Duration is set in milliseconds. Here is an example that sets max duration to 90
 ```kotlin
 	AdswizzAdRequest.Builder()
 		...	
-		.withDuration(90000) // milliseconds
+		.withDuration(90000.milliseconds) // milliseconds
 		...
 ```
 
