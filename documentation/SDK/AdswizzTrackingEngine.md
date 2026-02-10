@@ -6,35 +6,108 @@ The `AdswizzTrackingEngine` is the core of Server Side SDK business logic, the A
 The interface consists of a simple interface with only 5 functions **_started_**, **_error_**, **_progress_**, **_onEvent_**, **_ended_**.
 
 ```kotlin
-	@Throws(AdswizzTrackingException.InvalidPayload::class,
+interface AdswizzTrackingEngine {
+    @Throws(
+        AdswizzTrackingException.InvalidPayload::class,
         AdswizzTrackingException.InvalidArgument::class,
         AdswizzTrackingException.InternalError::class,
-        AdswizzTrackingException.InvalidElapsedTime::class)
-    fun started(payload: ByteArray, elapsedTime: Double, macroContext: MacroContext?): ByteArray
+        AdswizzTrackingException.InvalidElapsedTime::class
+    )
+    fun started(payload: ByteArray, elapsedTime: kotlin.time.Duration?, macroContext: MacroContext?): ByteArray
 
-    @Throws(AdswizzTrackingException.InvalidPayload::class,
+    @Throws(
+        AdswizzTrackingException.InvalidPayload::class,
         AdswizzTrackingException.InvalidArgument::class,
         AdswizzTrackingException.InternalError::class,
-        AdswizzTrackingException.InvalidElapsedTime::class)
-    fun error(payload: ByteArray, elapsedTime: Double, macroContext: MacroContext?): ByteArray
+        AdswizzTrackingException.InvalidElapsedTime::class
+    )
+    fun started(payload: ByteArray, elapsedTime: java.time.Duration?, macroContext: MacroContext?): ByteArray
 
-    @Throws(AdswizzTrackingException.InvalidPayload::class,
+    @Throws(
+        AdswizzTrackingException.InvalidPayload::class,
         AdswizzTrackingException.InvalidArgument::class,
         AdswizzTrackingException.InternalError::class,
-        AdswizzTrackingException.InvalidElapsedTime::class)
-    fun progress(payload: ByteArray, elapsedTime: Double, macroContext: MacroContext?): ByteArray
+        AdswizzTrackingException.InvalidElapsedTime::class
+    )
+    fun error(payload: ByteArray, elapsedTime: kotlin.time.Duration?, macroContext: MacroContext?): ByteArray
 
-    @Throws(AdswizzTrackingException.InvalidPayload::class,
+    @Throws(
+        AdswizzTrackingException.InvalidPayload::class,
         AdswizzTrackingException.InvalidArgument::class,
         AdswizzTrackingException.InternalError::class,
-        AdswizzTrackingException.InvalidElapsedTime::class)
-    fun onEvent(payload: ByteArray, elapsedTime: Double, event: AdEventType, macroContext: MacroContext?): ByteArray
+        AdswizzTrackingException.InvalidElapsedTime::class
+    )
+    fun error(payload: ByteArray, elapsedTime: java.time.Duration?, macroContext: MacroContext?): ByteArray
 
-    @Throws(AdswizzTrackingException.InvalidPayload::class,
+    @Throws(
+        AdswizzTrackingException.InvalidPayload::class,
         AdswizzTrackingException.InvalidArgument::class,
         AdswizzTrackingException.InternalError::class,
-        AdswizzTrackingException.InvalidElapsedTime::class)
-    fun ended(payload: ByteArray, elapsedTime: Double, reason: AdReasonType, macroContext: MacroContext?): ByteArray
+        AdswizzTrackingException.InvalidElapsedTime::class
+    )
+    fun progress(payload: ByteArray, elapsedTime: kotlin.time.Duration, macroContext: MacroContext?): ByteArray
+
+    @Throws(
+        AdswizzTrackingException.InvalidPayload::class,
+        AdswizzTrackingException.InvalidArgument::class,
+        AdswizzTrackingException.InternalError::class,
+        AdswizzTrackingException.InvalidElapsedTime::class
+    )
+    fun progress(payload: ByteArray, elapsedTime: java.time.Duration, macroContext: MacroContext?): ByteArray
+
+    @Throws(
+        AdswizzTrackingException.InvalidPayload::class,
+        AdswizzTrackingException.InvalidArgument::class,
+        AdswizzTrackingException.InternalError::class,
+        AdswizzTrackingException.InvalidElapsedTime::class
+    )
+    fun onEvent(
+        payload: ByteArray,
+        elapsedTime: kotlin.time.Duration?,
+        event: AdEventType,
+        macroContext: MacroContext?
+    ): ByteArray
+
+    @Throws(
+        AdswizzTrackingException.InvalidPayload::class,
+        AdswizzTrackingException.InvalidArgument::class,
+        AdswizzTrackingException.InternalError::class,
+        AdswizzTrackingException.InvalidElapsedTime::class
+    )
+    fun onEvent(
+        payload: ByteArray,
+        elapsedTime: java.time.Duration?,
+        event: AdEventType,
+        macroContext: MacroContext?
+    ): ByteArray
+
+    @Throws(
+        AdswizzTrackingException.InvalidPayload::class,
+        AdswizzTrackingException.InvalidArgument::class,
+        AdswizzTrackingException.InternalError::class,
+        AdswizzTrackingException.InvalidElapsedTime::class
+    )
+    fun ended(
+        payload: ByteArray,
+        elapsedTime: kotlin.time.Duration?,
+        reason: AdReasonType,
+        macroContext: MacroContext?
+    ): ByteArray
+
+    @Throws(
+        AdswizzTrackingException.InvalidPayload::class,
+        AdswizzTrackingException.InvalidArgument::class,
+        AdswizzTrackingException.InternalError::class,
+        AdswizzTrackingException.InvalidElapsedTime::class
+    )
+    fun ended(
+        payload: ByteArray,
+        elapsedTime: java.time.Duration?,
+        reason: AdReasonType,
+        macroContext: MacroContext?
+    ): ByteArray
+
+}
 ```
 
 The byte array returned by each function contain states that are used to preserve the state between consecutive calls. Each byte array returned by a function call
@@ -46,13 +119,17 @@ In order to get an implementation the companion builder must be used. For the in
 how the Engine works. 
 
 ```kotlin
-   class Builder {
-        private var enabled = false
+class Builder {
+    private var currentTrackingPolicy: TrackingPolicy = TrackingPolicy.InferredTrackingPolicy
 
-        fun withAutomaticTrackingDecisions(enableTracking: Boolean): Builder 
-
-        fun build(): AdswizzTrackingEngine 
+    fun withAutomaticTrackingDecisions(trackingPolicy: TrackingPolicy): Builder = apply {
+        this.currentTrackingPolicy = trackingPolicy
     }
+
+    fun build(): AdswizzTrackingEngine {
+        return AdswizzTrackingEngineImpl(currentTrackingPolicy)
+    }
+}
 ```
 The default `AdswizzTrackingEngine` instance is defined as follows:
 
@@ -98,7 +175,7 @@ val trackingEngine = AdswizzTrackingEngine.DEFAULT
 /**
  * the macro context state will remain empty, no macro expansion will be done after the started call
  */
-payload = trackingEngine.started(payload = payload, elapsedTime = 0.0, macroContext = null) // no updates for the existing macrContext
+payload = trackingEngine.started(payload = payload, elapsedTime = 0.milliseconds, macroContext = null) // no updates for the existing macrContext
 
 // ...
 val additionalContextWithPlayerState = MacroContext.Builder()
@@ -109,7 +186,7 @@ val additionalContextWithPlayerState = MacroContext.Builder()
  * the macro context state will contain [PLAYERSTATE] values after progress call
  * all the encountered macros with [PLAYERSTATE] will be expanded
  */
-payload = trackingEngine.progress(payload = payload, elapsedTime = 5.0, macroContext = additionalContextWithPlayerState)
+payload = trackingEngine.progress(payload = payload, elapsedTime = 5000.milliseconds, macroContext = additionalContextWithPlayerState)
 
 
 // ...
@@ -124,7 +201,7 @@ val additionalContextWithAsset = MacroContext.Builder()
  * the [ASSETURI] value : yourAssetUri.com
  * all the encountered macros with [PLAYERSTATE] and [ASSETURI] will be expanded with specified values after calling ended method.
  */
-payload = trackingEngine.ended(payload = payload, elapsedTime = 15.0, reason = AdReasonType.AD_COMPLETED, macroContext = additionalContextWithAsset)
+payload = trackingEngine.ended(payload = payload, elapsedTime = 15000.milliseconds, reason = AdReasonType.AD_COMPLETED, macroContext = additionalContextWithAsset)
 
 ```
 
@@ -133,7 +210,7 @@ AdswizzTrackingEngine trackingEngine = AdswizzTrackingEngine.getDefault();
 /**
  * the macro context state will remain empty, no macro expansion will be done after the started call
  */
-payload = trackingEngine.started(payload, 0.0, null); // no updates for the existing macrContext
+payload = trackingEngine.started(payload, Duration.ofMillis(0), null); // no updates for the existing macrContext
 
 // ...
 MacroContext additionalContextWithPlayerState = new MacroContext.Builder()
@@ -144,7 +221,7 @@ MacroContext additionalContextWithPlayerState = new MacroContext.Builder()
  * the macro context state will contain [PLAYERSTATE] values after progress call
  * all the encountered macros with [PLAYERSTATE] will be expanded
  */
-payload = trackingEngine.progress(payload, 5.0, additionalContextWithPlayerState);
+payload = trackingEngine.progress(payload, Duration.ofMillis(5000), additionalContextWithPlayerState);
 
 
 // ...
@@ -159,6 +236,6 @@ MacroContext additionalContextWithAsset = new MacroContext.Builder()
  * the [ASSETURI] value : yourAssetUri.com
  * all the encountered macros with [PLAYERSTATE] and [ASSETURI] will be expanded with specified values after calling ended method.
  */
-payload = trackingEngine.ended(payload, 15.0, AdReasonType.AD_COMPLETED, additionalContextWithAsset);
+payload = trackingEngine.ended(payload, Duration.ofMillis(15000), AdReasonType.AD_COMPLETED, additionalContextWithAsset);
 
 ```
