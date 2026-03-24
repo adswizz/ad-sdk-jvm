@@ -22,7 +22,9 @@ The AdsWizz SDK fully supports the following list of macros:
 - ADPLAYHEAD
 - ASSETURI
 - ADSERVINGID
-- LIMITADTRACKING <br>
+- LIMITADTRACKING
+- CONTENTID
+- CONTENTURI<br>
 and partially supports:
 - ERRORCODE - only some of the error codes are currently covered
 
@@ -42,9 +44,13 @@ The Macrocontext class is used by SDK to expand Macrocontext values in all urls 
 
         fun withCacheBusting(cacheBusting: Int?)
 
-        fun withContentPlayHead(contentPlayHead: Double?)
+        fun withContentPlayHead(contentPlayHead: java.time.Duration)
 
-        fun withMediaPlayHead(mediaPlayHead: Double?) 
+        fun withContentPlayHead(contentPlayHead: kotlin.time.Duration)
+
+        fun withContentPlayHead(contentPlayHead: java.time.Duration)
+        
+        fun withContentPlayHead(contentPlayHead: kotlin.time.Duration)
 
         fun withBreakPosition(breakPosition: BreakPosition?)
 
