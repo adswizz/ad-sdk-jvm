@@ -121,7 +121,7 @@ This will replace any url containing the given key as follows:
 ```
 http://trackingurl.com/firstQuartile?adCount=[ADCOUNT]&custom=__customMacro__
 -> will expand to:
-http://trackingurl.com/firstQuartile?adCount=[2]&custom=customMacroValue
+http://trackingurl.com/firstQuartile?adCount=2&custom=customMacroValue
 
 ```
 

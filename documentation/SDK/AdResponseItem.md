@@ -12,7 +12,16 @@ data class AdResponseItem(val payload: ByteArray, val adData: AdData)
 /**
  *  AdData object represents an ad item with minimal AdData information.
  */
-data class AdData(val id: String, val title: String, val duration: kotlin.time.Duration, val urls: List<MediaFile>) {
+data class AdData(
+    val id: String,
+    val title: String,
+    val duration: kotlin.time.Duration,
+    val mediaFiles: List<MediaFile>,
+    val advertiser: Advertiser?,
+    val companions: List<CompanionVast>,
+    val selectedCreativeId: String? = null,
+    val creativeExtensions: List<CreativeExtension>
+) {
 
     fun getJavaDuration(): java.time.Duration {
         return duration.toJavaDuration()

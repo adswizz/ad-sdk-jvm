@@ -88,7 +88,7 @@ dependencies {
 In the code snippet above, replace <strong>SdkVersion</strong> with the version of SDK provided by Adswizz (i.e. 0.6.5 - the latest version). Example:
 
 ```groovy
-implementation 'com.adswizz:adswizz-sdk:0.6.5'
+implementation 'com.adswizz:sdk-jvm:0.7.1'
 
 ```
 

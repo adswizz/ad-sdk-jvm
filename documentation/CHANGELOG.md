@@ -7,11 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.7.1] - 2026-05-15
 ### Added
-- Added new methods MacroContext.Builder:
+- Added new methods in MacroContext.Builder:
   - `withErrorCode(errorCode: Int)` used for replacing the [ERRORCODE] macro. This is an overloaded version for `withErrorCode(errorCode: VASTErrorCode)`.
   - `withCustomMacroValues(customMacroValues: Map<String, String>)` used to replace any non-VAST macro with the given key. For more details, please visit the [Macros](JvmSDK/SDK/VastMacros.md) page.
-  
+- Added `advertiser`, `selectedCreativeId`, `companions`  and `creativeExtensions` fields to the AdData class.
+- Added a new mechanism to support generic XML objects defined within `CreativeExtension` and `Extension` VAST tags. The parsed XML objects are exposed through new `XmlNode` data class, accessible from CreativeExtension and Extension classes.
+- Added a new method fun `withQueryParameters(parameters: Map<String, String>)` to the AdswizzAdRequest.Builder. This method accepts unencoded key value pairs used to append additional parameters to AdswizzAdRequest.
+- Added new property `minExtraDuration` in AdswizzShimZone data class. This specifies the minimum duration that the ad server is required to fill for the shim zone.
+
 ### Changed
+- Removed the `maxDeadAir` property from AdswizzShimZone.
 
 ## [0.7.0] - 2026-03-24
 ### Added
