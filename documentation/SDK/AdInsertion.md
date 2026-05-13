@@ -39,8 +39,8 @@ new AdswizzShimZone.Builder()
     .withMinExtraDuration(Duration.ofMillis(3000L))
     .build();
 ```
-Each `AdswizzShimZone` object is defined by a mandatory `zoneId`/`zoneAlias` and an optional `maxDeadAir` field, where `zoneId` or `zoneAlias` is provided by the PIM.
-The fields `zoneId` or `zoneAlias` checked in the same manner as AdswizzAdZone. The `maxDeadAir` parameter represents the minimal threshold time necessary to fill the remaining duration with shims ads.
+Each `AdswizzShimZone` object is defined by a mandatory `zoneId`/`zoneAlias` and an optional `minExtraDuration` field, where `zoneId` or `zoneAlias` is provided by the PIM.
+The fields `zoneId` or `zoneAlias` are checked in the same manner as AdswizzAdZone. The `minExtraDuration` parameter specifies the minimum duration that the ad server is required to fill for the shim zone.
 
 The minimal request looks like the following: one or more zones and a server url 
 ```kotlin
