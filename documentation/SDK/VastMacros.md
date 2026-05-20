@@ -1,6 +1,6 @@
 # Vast Macros
 
-The AdsWizz SDK fully supports the following list of macros:
+The Adswizz SDK fully supports the following list of macros:
 - TIMESTAMP
 - CACHEBUSTING
 - CONTENTPLAYHEAD
@@ -91,8 +91,37 @@ The Macrocontext class is used by SDK to expand Macrocontext values in all urls 
         fun withErrorCode(errorCode: VASTErrorCode?)
 
         fun withLimitAdTrackingEnabled(limitAdTrackingEnabled: Boolean?)
-		
-	}
+
+        fun withErrorCode(errorCode: Int)
+
+        fun withLimitAdTrackingEnabled(limitAdTrackingEnabled: Boolean?)
+
+        fun withContentId(contentId: String?)
+
+        fun withContentUri(contentUri: String?)
+
+        fun withCustomMacroValues(customMacroValues: Map<String, String>)
+    }
 
 }
 ```
+
+## Custom macro values
+The AdswizzSDK supports expanding custom non-VAST macros using the `withCustomMacroValues` method. This method accepts key value pairs that are expanded after all the VAST MACROS were applied.
+
+```kotlin
+    MacroContext.Builder()
+        .withAdCount(2)
+        .withCustomMacroValues(
+            mapOf("__customMacro__" to "customMacroValue")
+        )
+        .build()
+```
+This will replace any url containing the given key as follows:
+```
+http://trackingurl.com/firstQuartile?adCount=[ADCOUNT]&custom=__customMacro__
+-> will expand to:
+http://trackingurl.com/firstQuartile?adCount=2&custom=customMacroValue
+
+```
+

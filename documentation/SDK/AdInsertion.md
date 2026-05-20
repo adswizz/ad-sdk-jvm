@@ -30,17 +30,17 @@ Each `AdswizzAdZone` object is defined by a mandatory `zoneId` or `zoneAlias`, p
 ```kotlin
 AdswizzShimZone.Builder()
     .withZoneId("SHIM_ZONEID_1_PROVIDED_BY_PIM") // or .withZoneAlias("SHIM_ZONE_ALIAS_PROVIDED_BY_PIM")
-    .withMaxDeadAir(3_000.milliseconds)
+    .withMinExtraDuration(3_000.milliseconds)
     .build()
 ```
 ```java
 new AdswizzShimZone.Builder()
     .withZoneId("SHIM_ZONEID_1_PROVIDED_BY_PIM") // or .withZoneAlias("SHIM_ZONE_ALIAS_PROVIDED_BY_PIM")
-    .withMaxDeadAir(Duration.ofMillis(3000L))
+    .withMinExtraDuration(Duration.ofMillis(3000L))
     .build();
 ```
-Each `AdswizzShimZone` object is defined by a mandatory `zoneId`/`zoneAlias` and an optional `maxDeadAir` field, where `zoneId` or `zoneAlias` is provided by the PIM.
-The fields `zoneId` or `zoneAlias` checked in the same manner as AdswizzAdZone. The `maxDeadAir` parameter represents the minimal threshold time necessary to fill the remaining duration with shims ads.
+Each `AdswizzShimZone` object is defined by a mandatory `zoneId`/`zoneAlias` and an optional `minExtraDuration` field, where `zoneId` or `zoneAlias` is provided by the PIM.
+The fields `zoneId` or `zoneAlias` are checked in the same manner as AdswizzAdZone. The `minExtraDuration` parameter specifies the minimum duration that the ad server is required to fill for the shim zone.
 
 The minimal request looks like the following: one or more zones and a server url 
 ```kotlin
@@ -97,15 +97,19 @@ Only one shim zone can be set in `AdswizzAdRequest`.
 
 **Custom request parameters**
 
-You may use custom parameters (key-value pairs) in your requests, in order to send various information like the publisher-specific ID, first-party targeting data etc.
-Here is an example:
-
+You may use custom parameters (key-value pairs) in your requests, in order to send various information, such as the TCF v2 consent string, the publisher-specific ID, first-party targeting data etc. using the following methods:
+- `withCustomParameter` method. This appends your custom URL encoded data to the AdRequest.
 ```kotlin
 	AdswizzAdRequest.Builder()
 		.withCustomParameter("key1=URLEncodedValue1&key2=URLEncodedValue2")
 		...
 ```
-
+- `withQueryParameters` method. This method accepts unencoded key value pairs used to append additional parameters to the AdRequest. The resulted request will contain unique query parameters, in case of collisions, all the existing keys will be overridden with the values from parameters map. Providing URL-encoded parameters (e.g. mapOf("myCustomKeyParam1" to "my%20custom%20value1")) will result in double encoding.
+```kotlin
+	AdswizzAdRequest.Builder()
+		.withQueryParameters(mapOf("myCustomKeyParam1" to "my custom value1"))
+		...
+```
 **Duration request parameters**
 
 An optional parameter is duration, which sets the maximum total duration of ads to be selected, in seconds. It can be used to fine tune the ad delivery and request a specific total duration.
