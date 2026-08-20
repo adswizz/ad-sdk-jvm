@@ -1,0 +1,117 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.adswizz",
+    "module": "sdk-jvm",
+    "version": "0.9.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.9.10"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "sdk-jvm-0.9.1.jar",
+          "url": "sdk-jvm-0.9.1.jar",
+          "size": 488409,
+          "sha512": "a321802abc9781b15bc7620e7deac89fcae728d7500f22bc2a03ed7b355f1adc51406a4eabe1da2992ad23fc45dce9ccd6c09d3b36e891614bd8e5e390820acd",
+          "sha256": "dcf290581b04996c8ea11fd71bb0e6c1853d47c572d5d0ce646afe67beac4ee7",
+          "sha1": "9e1177527615e396dc15a1c2112558f4ee19de5e",
+          "md5": "cedef3d69d960a96e154b77ba3185871"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-core",
+          "version": {
+            "requires": "1.7.3"
+          }
+        },
+        {
+          "group": "net.sf.kxml",
+          "module": "kxml2",
+          "version": {
+            "requires": "2.3.0"
+          }
+        },
+        {
+          "group": "com.squareup.moshi",
+          "module": "moshi",
+          "version": {
+            "requires": "1.14.0"
+          }
+        },
+        {
+          "group": "com.squareup.moshi",
+          "module": "moshi-adapters",
+          "version": {
+            "requires": "1.14.0"
+          }
+        },
+        {
+          "group": "org.owasp.encoder",
+          "module": "encoder",
+          "version": {
+            "requires": "1.4.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.9.10"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "sdk-jvm-0.9.1.jar",
+          "url": "sdk-jvm-0.9.1.jar",
+          "size": 488409,
+          "sha512": "a321802abc9781b15bc7620e7deac89fcae728d7500f22bc2a03ed7b355f1adc51406a4eabe1da2992ad23fc45dce9ccd6c09d3b36e891614bd8e5e390820acd",
+          "sha256": "dcf290581b04996c8ea11fd71bb0e6c1853d47c572d5d0ce646afe67beac4ee7",
+          "sha1": "9e1177527615e396dc15a1c2112558f4ee19de5e",
+          "md5": "cedef3d69d960a96e154b77ba3185871"
+        }
+      ]
+    }
+  ]
+}
