@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added empty ads reporting. The SDK will fire `<Error>` trackers automatically when no ads are present in the VAST response.
 ### Changed
-- Changed the analytics behaviour to be emmit the `AnalyticsEvent` in sync with the fired tracking triggered by any `AdswizzTrackingEngine` call.
+- Changed the analytics behaviour to emmit the `AnalyticsEvent` in sync with the fired tracking triggered by any `AdswizzTrackingEngine` call.
 
 
 ## [0.9.0] - 2026-07-30
