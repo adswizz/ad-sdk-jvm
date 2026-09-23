@@ -235,8 +235,8 @@ public class BasicSpringBootSampleJavaApplication {
         }
     }
 
-    @GetMapping("/error")
-    public String error(@RequestParam(value = "unique_id", defaultValue = "1") String unique_id, @RequestParam(value = "reason", defaultValue = "unknown") String reason) {
+    @GetMapping("/endedWithError")
+    public String endedWithError(@RequestParam(value = "unique_id", defaultValue = "1") String unique_id) {
         byte[] item = adPayloadStorage.get(unique_id);
         int initialSize = item.length;
         long milis = System.currentTimeMillis();
@@ -249,6 +249,30 @@ public class BasicSpringBootSampleJavaApplication {
 
         try {
             byte[] newPayload = trackingEngine.ended(item, null, AdReasonType.AD_SKIPPED_WITH_ERROR, newMacro);
+            adPayloadStorage.put(unique_id, newPayload);
+            milis = System.currentTimeMillis() - milis;
+
+            return "{ \"initialByteArraySize\":\"" + initialSize + ",\"durationMillis\":" + milis + "}";
+        } catch (AdswizzTrackingException e) {
+            return "{ \"exception\":\"" + e.getMessage() + ",\"durationMillis\":" + milis + "}";
+        }
+
+    }
+
+    @GetMapping("/errorTracking")
+    public String errorTrackingEngine(@RequestParam(value = "unique_id", defaultValue = "1") String unique_id) {
+        byte[] item = adPayloadStorage.get(unique_id);
+        int initialSize = item.length;
+        long milis = System.currentTimeMillis();
+
+        // example of how to:
+        // override the current macro context if needed
+        MacroContext newMacro = new MacroContext.Builder()
+                .withErrorCode(VASTErrorCode.RESPONSE_NOT_SUPPORTED) // or your custom error code
+                .build();
+
+        try {
+            byte[] newPayload = trackingEngine.error(item, null, newMacro);
             adPayloadStorage.put(unique_id, newPayload);
             milis = System.currentTimeMillis() - milis;
 

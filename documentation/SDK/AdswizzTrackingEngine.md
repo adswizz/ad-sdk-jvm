@@ -60,7 +60,7 @@ interface AdswizzTrackingEngine {
     fun started(payload: ByteArray, elapsedTime: java.time.Duration?, macroContext: MacroContext?): ByteArray
 
     /**
-     * Fires the error tracking URLs for the ad described by [payload].
+     * Fires the error tracking URLs for the ad described by [payload]. The tracking URLs are merged from <Error> tags present in Wrappers and InLine tags.
      *
      * @param payload serialized ad payload.
      * @param elapsedTime time elapsed since the ad started playing, or `null` if not applicable.
