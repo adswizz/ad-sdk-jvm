@@ -15,6 +15,7 @@ data class AdResponseItem(val payload: ByteArray, val adData: AdData)
 data class AdData(
     val id: String,
     val title: String,
+    val description: String,
     val duration: kotlin.time.Duration,
     val mediaFiles: List<MediaFile>,
     val advertiser: Advertiser?,

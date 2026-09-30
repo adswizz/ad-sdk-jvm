@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.2] - 2026-09-30
+### Added
+- Added new fields to the `AdData` class
+  - `title` The ad title field from VAST response.
+  - `description` The ad description field from VAST response.
+### Changed
+- Improved VAST parser flexibility by allowing non-standard syntax and using a best-effort approach for VASTs with illegal characters or VASTs that ends unexpectedly.
+
 ## [0.9.1] - 2026-08-20
 ### Added
 - Added empty ads reporting. The SDK will fire `<Error>` trackers automatically when no ads are present in the VAST response.
