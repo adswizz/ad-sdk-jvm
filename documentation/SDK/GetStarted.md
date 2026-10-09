@@ -46,13 +46,6 @@ You can easily integrate the AdswizzSDK into your project. There are 2 steps to 
 ```groovy
 maven {
     url "https://raw.githubusercontent.com/adswizz/ad-sdk-jvm/main/releases"
-    credentials(HttpHeaderCredentials) {
-        name = "Authorization"
-        value = "Bearer YOUR-AUTH-TOKEN-PROVIDED-BY-ADSWIZZ-PIM"
-    }
-    authentication {
-        header(HttpHeaderAuthentication)
-    }
 }
 ```
 
@@ -61,16 +54,10 @@ The final code should look something like this:
 ```groovy
 repositories {
     mavenCentral()
+    google()
 
     maven {
         url "https://raw.githubusercontent.com/adswizz/ad-sdk-jvm/main/releases"
-        credentials(HttpHeaderCredentials) {
-            name = "Authorization"
-            value = "Bearer YOUR-AUTH-TOKEN-PROVIDED-BY-ADSWIZZ-PIM"
-        }
-        authentication {
-            header(HttpHeaderAuthentication)
-        }
     }
     // .... other repositories declared
 }

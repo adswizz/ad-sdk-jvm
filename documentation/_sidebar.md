@@ -11,7 +11,8 @@
     - [AdResponseItem](JvmSDK/SDK/AdResponseItem.md)
     - [AdswizzSDK Analytics](JvmSDK/SDK/AdswizzSDKAnalytics.md)
     - [Debugging](JvmSDK/SDK/Debugging.md)
-    - [Sample projects](JvmSDK/SDK/SampleProjects.md)   
+    - [Code Signing](JvmSDK/SDK/CodeSigning.md)
+    - [Sample projects](JvmSDK/SDK/SampleProjects.md)
     
 
 - Changelog
