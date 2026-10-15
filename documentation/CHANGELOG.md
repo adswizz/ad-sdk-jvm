@@ -1,4 +1,4 @@
-[<img src="../img/adswizz_logo.png" alt="AdsWizz" style="width:30%;">](https://www.adswizz.com)
+[<img src="/img/adswizz_logo.png" alt="AdsWizz" style="width:30%;">](https://www.adswizz.com)
 # Changelog
 All notable changes to this project will be documented in this file.
 
@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.9.3] - 2026-10-09
 ### Changed
-- Signed SDK Binaries: Starting with this release, all **_AdswizzSDK_** published artifacts (`.jar`, `.pom`) are officially PGP-signed (`.asc` signature files included in the bundle release). For more details and verification steps please visit the [CodeSigning](JvmSDK/SDK/CodeSigning) page.
+- Signed SDK Binaries: Starting with this release, all **_AdswizzSDK_** published artifacts (`.jar`, `.pom`) are officially PGP-signed (`.asc` signature files included in the bundle release). For more details and verification steps please visit the [CodeSigning](/JvmSDK/SDK/CodeSigning) page.
 
 ## [0.9.2] - 2026-09-30
 ### Added
@@ -51,7 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added new methods in MacroContext.Builder:
   - `withErrorCode(errorCode: Int)` used for replacing the [ERRORCODE] macro. This is an overloaded version for `withErrorCode(errorCode: VASTErrorCode)`.
-  - `withCustomMacroValues(customMacroValues: Map<String, String>)` used to replace any non-VAST macro with the given key. For more details, please visit the [Macros](JvmSDK/SDK/VastMacros.md) page.
+  - `withCustomMacroValues(customMacroValues: Map<String, String>)` used to replace any non-VAST macro with the given key. For more details, please visit the [Macros](/JvmSDK/SDK/VastMacros.md) page.
 - Added `advertiser`, `selectedCreativeId`, `companions`  and `creativeExtensions` fields to the AdData class.
 - Added a new mechanism to support generic XML objects defined within `CreativeExtension` and `Extension` VAST tags. The parsed XML objects are exposed through new `XmlNode` data class, accessible from CreativeExtension and Extension classes.
 - Added a new method fun `withQueryParameters(parameters: Map<String, String>)` to the AdswizzAdRequest.Builder. This method accepts unencoded key value pairs used to append additional parameters to AdswizzAdRequest.
@@ -62,19 +62,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.7.0] - 2026-03-24
 ### Added
-- Added support for CONTENTID and CONTENTURI macros. For more details, please visit the [Macros](JvmSDK/SDK/VastMacros.md) page.
+- Added support for CONTENTID and CONTENTURI macros. For more details, please visit the [Macros](/JvmSDK/SDK/VastMacros.md) page.
 ### Changed
 - Changed `MacroContext.withMediaPlayHead` and `MacroContext.withContentPlayHead` methods to accept either `kotlin.time.Duration` or `java.time.Duration`.
 
 ## [0.6.5] - 2026-02-10
 ### Added
 - Added support for `java.time.Duration` in the public API
-- Added `BasicSpringBootSampleJava` sample project. Fore more details, please visit the [sample projects](JvmSDK/SDK/SampleProjects.md) page.
+- Added `BasicSpringBootSampleJava` sample project. Fore more details, please visit the [sample projects](/JvmSDK/SDK/SampleProjects.md) page.
 
 ### Changed
 - Changed duration parameters to be either `kotlin.time.Duration` or `java.time.Duration` instead of double/long primitives.
-- Changed `AdswizzAdZone` and `AdswizzShimZone` instance creation to Builder pattern to improve **Java** interoperability. For more details, please visit the updated [AdInsertion](JvmSDK/SDK/AdInsertion.md) page.
-- Improved **Java** interoperability for the`AdswizzSDK` singleton. For more details, please visit the updated [SDK initialization](JvmSDK/SDK/GetStarted.md) section.
+- Changed `AdswizzAdZone` and `AdswizzShimZone` instance creation to Builder pattern to improve **Java** interoperability. For more details, please visit the updated [AdInsertion](/JvmSDK/SDK/AdInsertion.md) page.
+- Improved **Java** interoperability for the`AdswizzSDK` singleton. For more details, please visit the updated [SDK initialization](/JvmSDK/SDK/GetStarted.md) section.
 
 ## [0.4.0] - 2025-12-19
 ### Added

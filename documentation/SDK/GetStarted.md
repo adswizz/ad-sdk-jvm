@@ -9,7 +9,7 @@ The AdswizzSDK facilitates the ad lifecycle management, right from your applicat
 
 ## Changelog
 
-Please check [here](JvmSDK/CHANGELOG.md) for the latest AdswizzSDK version and all the new changes & fixes it comes with.
+Please check [here](/JvmSDK/CHANGELOG.md) for the latest AdswizzSDK version and all the new changes & fixes it comes with.
 
 ## Dependencies
 
