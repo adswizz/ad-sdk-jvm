@@ -35,7 +35,6 @@ encoder_version = "1.4.0"
 ---
 **NOTE**
 If you are excluding any tested dependency version and using another version (that doesn't ensure backward/forward compatibility with the version we have tested) you may encounter unexpected behavior.<br>
----  
 
 ## Adding the SDK to your Project
 

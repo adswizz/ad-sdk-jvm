@@ -14,8 +14,8 @@ Learn the basics of how to request ads from the Adswizz Server and how to genera
       <p id="customTableDescription">Tools and information to familiarize yourself with concepts like <span id="highlighted">AdRequest</span>, <span id="highlighted">AdRequestConnection</span> and <span id="highlighted">AdswizzTrackingEngine</span>.</p></td>
     </tr>
     <tr>
-      <td><h4 id="customTableTitle"><a href="/JvmSDK/SDK/AdswizzGeneralSettings">AdswizzSDK General Settings</a></h4>
-      <p id="customTableDescription">Describes various settings in AdswizzSDK such as Privacy options.</p></td>
+      <td><h4 id="customTableTitle"><a href="/JvmSDK/SDK/AdswizzTrackingEngine">Adswizz Tracking Engine</a></h4>
+      <p id="customTableDescription">Describes how to trigger the ad-tracking events e.g: impressions, quartiles etc. in AdswizzSDK .</p></td>
       <td><h4 id="customTableTitle"><a href="/JvmSDK/SDK/SampleProjects">Sample Projects</a></h4>
       <p id="customTableDescription">Hands-on examples to help you integrate AdswizzSDK.</p></td>
     </tr>
